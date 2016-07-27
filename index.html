@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+ <head>
+ <title>Attendance Calculator</title>
+     <style>
+         body{
+             background: green;
+         }
+         .ba,.ca{
+             width:600px;
+             margin:auto;
+         } 
+         .fo{
+             text-align: center;
+             position: relative;
+             margin: 0;
+         }
+         .fo input,.fo h{
+             online:0;
+             background-color: antiquewhite;
+             width:100%;
+             padding:15px;
+             box-sizing: border-box;
+             font-size: 40px;
+         }
+         .fo input:hover{
+             background-color: teal;
+         }
+         .ca p{
+             background-color:mediumturquoise;
+             width:100%;
+             padding:15px;
+             box-sizing: border-box;
+             font-size: 40px;
+             color: palevioletred;
+         }
+		 .mm::-webkit-scrollbar { 
+          display: none; 
+          }
+     </style>
+      <script>
+ var totalClasses=function(){
+ var noInitialDays=document.getElementById("inhowManyDays").value;
+ var noClassEachDay= document.getElementById("inhowManyClass").value;
+ var noHolidays=document.getElementById("inHolidays").value;
+ var noNotCountClasses=document.getElementById("inNoperiods").value;
+  var el=document.getElementById("disTotalClasses");
+  var toClass=(((noInitialDays*noClassEachDay)-(noHolidays*noClassEachDay))-(noNotCountClasses));
+  el.innerHTML="Total Classes"+" "+toClass;
+  return toClass;
+ }
+ var absentClasses=function(){
+   var noBunkClasses=document.getElementById("inBunk").value;
+   var toPresent=totalClasses()-noBunkClasses;
+   var fl=document.getElementById("disAbsentClasses");
+   fl.innerHTML="Attended Classes"+" "+toPresent;
+   return toPresent;
+ }
+ var attendance=function(){
+   var attend=(absentClasses()/totalClasses())*100;
+   var gl=document.getElementById("disAttendance");
+   gl.innerHTML="Attendance"+" "+attend;
+   return attend;
+ }
+ </script>
+         
+ </head>
+ <body>
+ <div class="mm>
+     <div class="ba">
+         <div class="fo">
+             <h>Attendance Calculator</h>
+         <input type="number" id="inhowManyDays" placeholder="Totaldays" /><br />
+         <input type="number" id="inhowManyClass" placeholder="Classes per day" /><br />
+         <input type="number" id="inHolidays" placeholder="Holidays" /><br />
+         <input type="number" id="inNoperiods" placeholder="disregard classes" onchange="totalClasses();" /><br />
+         <input type="number" id="inBunk" placeholder="Bunks" onchange="absentClasses();" /><br />
+         <input type="submit" onclick="attendance();" name="Calculate" />
+     </div>
+     </div>
+     <div class="ca">
+         <p id="disTotalClasses"></p>
+         <p id="disAbsentClasses"></p>
+         <p id="disAttendance"></p>
+     </div>
+	 </div>
+</body>
+</html>
